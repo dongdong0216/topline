@@ -64,13 +64,13 @@ export default {
     }
   },
   created () {
-    document.onkeypress = e=> {
-      var keycode = document.all ? event.keyCode : e.which;
+    document.onkeypress = e => {
+      var keycode = document.all ? event.keyCode : e.which
       if (keycode === 13) {
-        this.login();
-        return false;
+        this.login()
+        return false
       }
-    };
+    }
   }
 }
 </script>
