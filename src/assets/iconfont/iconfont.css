@@ -1,0 +1,25 @@
+@font-face {font-family: "iconfont";
+  src: url('iconfont.eot?t=1573388834418'); /* IE9 */
+  src: url('iconfont.eot?t=1573388834418#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('data:application/x-font-woff2;charset=utf-8;base64,d09GMgABAAAAAAOwAAsAAAAAB3wAAANiAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHEIGVgCDBgqCWII7ATYCJAMMCwgABCAFhG0HQRuMBlGUDkaX7GuMiQx1PVLUeocLjh4gAD4ACEqEYOlaPGOsiBa9XwfM9zwPEA/w++M9Fw8fRtyymxWFENfgtpTWVIoQhbilN3hzR/eFv4838dOza3HGkRRggXW1phsCI1aoALcKAFSA9oE2hzPvXmd8ZW2FjxIt/C/v1Q+KAss8xgHJQHa+nhiyozU0zmbdVoVQ3EE94DZUuL+QnMz6IbGqduvTVcDd57mc3hSf385yWpPGXjipF2AcUKB74FFCaYEE5IE0jF3QEu8T0GqSBrdfPXxAVWYuCwiXfHcF1YxDbmgPakFZsTcTHiqp44k38CD4fPihF6qIioS5du+Zyy2cfAZ3k7ImM/UIuul8YIdIWAdkwunKwFGFqLAOa1Wtxeb6UhbEqdK/IdBq9nKjP7xIKDFb28EyLEY+Dzgygc+bFIgggRIVLgJ3INv/KlnqJrUYpY7mT5SvP91If5+PbUP/HDjx+eJsgYH7Ls2Vx3KLc0v5hdl5DwHZcXVfejY/P0MLj8r41/+sMig+ufJFAMsenZePhQCSHdp+AuUX1Qs09+pPOv/oyzHdw3N54PKUx/sbDGdBumV1QQ4zaAQ59FdXDv/iKVSGeMMaio4QRwuOC/qiaEFUFdUOJzY6NiAqXZvxXi0ye8mPwX1qcHFZ4zo+di1oehH4T/Xq8beiWX4a4vWyUu/1ffzKyP5+O/A6u669h9Al2d1bedwcww+boRbwDkYS8aWlEfAfPnxwMAxZAjT6r1cA0uZ/fst34PGLiCBCVs9GBng7jxskGvYy6G6vTzoY+Am6jkNZM5jOlBWtozWCydZUTASqeVjDjPT6hutvV+uFagMJosoEkto8mdl1FNpsQKm2Ca3W5MNt+qwKQi5YdQIE3S5EnZ4j6faQmX1RGPSj1B0KaHU4cGabxeDXlbTStMWS4rThxLHduh62v5FropVMGwLui6Ty0xisz5evKSE5xYbNur1dO9hLjjGBxyiKGGfJAW10a9R6d+xcX/WkVuUY6raRyIpGtlCRQpMNlnC88Vq98P43xGVEVmTDQFX1C5EUf3oUWL4DeW1NOg3cipKN5erZaQ7Uk1gMJeAjkVVgaK6eFSAbWss4ILdzzKFRfVdra3l7/H4noJXZmYKbLOi89G3KYxP45Uj6TgoAAAA=') format('woff2'),
+  url('iconfont.woff?t=1573388834418') format('woff'),
+  url('iconfont.ttf?t=1573388834418') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+  url('iconfont.svg?t=1573388834418#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-iconfontshouji:before {
+  content: "\e615";
+}
+
+.icon-verify:before {
+  content: "\e63f";
+}
+
