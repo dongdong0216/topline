@@ -6,10 +6,7 @@ import '@/assets/css/global.css'
 // 引入第三方组件库
 import ElementUI from 'element-ui'
 // 引入axios
-import axios from 'axios'
-
-axios.defaults.baseURL = 'http://ttapi.research.itcast.cn/mp/v1_0/'
-Vue.prototype.$http = axios
+import '@/utils/ax.js'
 
 Vue.config.productionTip = false
 

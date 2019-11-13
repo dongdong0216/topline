@@ -6,7 +6,7 @@ Vue.use(VueRouter)
 
 const routes = [{
   path: '/',
-  redirect: '/login'
+  redirect: '/welcome'
 },
 {
   path: '/login',
@@ -18,11 +18,18 @@ const routes = [{
   name: 'home',
   redirect: '/welcome',
   component: () => import('@/views/home'),
-  children: [{
-    path: '/welcome',
-    name: 'welcome',
-    component: () => import('@/views/welcome')
-  }]
+  children: [
+    {
+      path: '/welcome',
+      name: 'welcome',
+      component: () => import('@/views/welcome')
+    },
+    {
+      path: '/article',
+      name: 'article',
+      component: () => import('@/views/article')
+    }
+  ]
 }
 ]
 
