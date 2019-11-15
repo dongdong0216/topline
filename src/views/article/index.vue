@@ -12,7 +12,6 @@
             <el-radio v-model="searchForm.status" label="1">待审核</el-radio>
             <el-radio v-model="searchForm.status" label="2">审核通过</el-radio>
             <el-radio v-model="searchForm.status" label="3">审核失败</el-radio>
-            <el-radio v-model="searchForm.status" label="4">已删除</el-radio>
           </el-form-item>
           <el-form-item label="频道列表:">
             <el-select v-model="searchForm.channel_id" clearable placeholder="请选择">
@@ -59,15 +58,27 @@
               <el-tag v-else-if="stData.row.status===1" type="success">待审核</el-tag>
               <el-tag v-else-if="stData.row.status===2" type="info">审核通过</el-tag>
               <el-tag v-else-if="stData.row.status===3" type="warning">审核失败</el-tag>
-              <el-tag v-else type="danger">已删除</el-tag>
             </template>
           </el-table-column>
           <el-table-column prop="pubdate" label="发布时间"></el-table-column>
           <el-table-column label="操作">
-            <el-button type="primary" size="mini">修改</el-button>
-            <el-button type="danger" size="mini">删除</el-button>
+            <template slot-scope="stData">
+              <el-button type="primary" size="mini">修改</el-button>
+              <el-button type="danger" size="mini" @click="del(stData.row.id)">删除</el-button>
+            </template>
           </el-table-column>
         </el-table>
+      </div>
+      <div class="text item">
+        <el-pagination
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :current-page="searchForm.page"
+          :page-sizes="[10, 20, 30, 40]"
+          :page-size="searchForm.per_page"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="tot"
+        ></el-pagination>
       </div>
     </el-card>
   </div>
@@ -93,26 +104,48 @@ export default {
     }
   },
   watch: {
-    timetotime (newval) {
-      if (newval) {
-        this.searchForm.begin_pubdate = newval[0]
-        this.searchForm.end_pubdate = newval[1]
+    timetotime (newv, oldv) {
+      if (newv) {
+        this.searchForm.begin_pubdate = newv[0]
+        this.searchForm.end_pubdate = newv[1]
       } else {
         this.searchForm.begin_pubdate = ''
         this.searchForm.end_pubdate = ''
       }
     },
     searchForm: {
-      handler: function (a, b) {
+      handler: function (newv, oldv) {
         this.getArticleList()
       },
       deep: true
     }
-
   },
   methods: {
+    del (id) {
+      this.$confirm('确定删除该文章么?', '删除', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        var pro = this.$http.delete(`/articles/${id}`)
+        pro
+          .then((result) => {
+            this.$message.success('文章删除成功')
+            this.getArticleList()
+          }).catch((err) => {
+            this.$message.error('文章删除错误' + err)
+          })
+      }).catch(() => {
+      })
+    },
+    handleSizeChange (val) {
+      this.searchForm.per_page = val
+    },
+    handleCurrentChange (val) {
+      this.searchForm.page = val
+    },
     getChannelList () {
-      let pro = this.$http.get('channels')
+      let pro = this.$http.get('/channels')
       pro
         .then(result => {
           if (result.data.message === 'OK') {

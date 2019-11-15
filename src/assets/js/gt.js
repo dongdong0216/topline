@@ -130,6 +130,7 @@
     }
 
     script.onerror = function () {
+      // eslint要求函数实参不能是boolean值，相反可以传递变量
       let flag = true
       cb(flag)
     }
@@ -227,7 +228,7 @@
 
     var cb = 'geetest_' + random()
     window[cb] = function (data) {
-      if (data.status === 'success') {
+      if (data.status.toString() === 'success') {
         callback(data.data)
       } else if (!data.status) {
         callback(data)
