@@ -14,14 +14,7 @@
             <el-radio v-model="searchForm.status" label="3">审核失败</el-radio>
           </el-form-item>
           <el-form-item label="频道列表:">
-            <el-select v-model="searchForm.channel_id" clearable placeholder="请选择">
-              <el-option
-                v-for="item in channelList"
-                :key="item.id"
-                :label="item.name"
-                :value="item.id"
-              ></el-option>
-            </el-select>
+            <channel-com @slt="selectHandler"></channel-com>
           </el-form-item>
           <el-form-item label="时间选择:">
             <el-date-picker
@@ -63,7 +56,11 @@
           <el-table-column prop="pubdate" label="发布时间"></el-table-column>
           <el-table-column label="操作">
             <template slot-scope="stData">
-              <el-button type="primary" size="mini">修改</el-button>
+              <el-button
+                type="primary"
+                size="mini"
+                @click="$router.push(`/articleedit/${stData.row.id}`)"
+              >修改</el-button>
               <el-button type="danger" size="mini" @click="del(stData.row.id)">删除</el-button>
             </template>
           </el-table-column>
@@ -85,13 +82,17 @@
 </template>
 
 <script>
+import ChannelCom from '@/components/channel.vue'
 export default {
+  components: {
+    // 注册频道独立组件
+    ChannelCom
+  },
   name: 'articleList',
   data () {
     return {
       articleList: [],
       timetotime: [],
-      channelList: [],
       tot: 0,
       searchForm: {
         status: '',
@@ -121,40 +122,33 @@ export default {
     }
   },
   methods: {
+    selectHandler (val) {
+      this.searchForm.channel_id = val
+    },
     del (id) {
       this.$confirm('确定删除该文章么?', '删除', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
-      }).then(() => {
-        var pro = this.$http.delete(`/articles/${id}`)
-        pro
-          .then((result) => {
-            this.$message.success('文章删除成功')
-            this.getArticleList()
-          }).catch((err) => {
-            this.$message.error('文章删除错误' + err)
-          })
-      }).catch(() => {
       })
+        .then(() => {
+          var pro = this.$http.delete(`/articles/${id}`)
+          pro
+            .then(result => {
+              this.$message.success('文章删除成功')
+              this.getArticleList()
+            })
+            .catch(err => {
+              this.$message.error('文章删除错误' + err)
+            })
+        })
+        .catch(() => {})
     },
     handleSizeChange (val) {
       this.searchForm.per_page = val
     },
     handleCurrentChange (val) {
       this.searchForm.page = val
-    },
-    getChannelList () {
-      let pro = this.$http.get('/channels')
-      pro
-        .then(result => {
-          if (result.data.message === 'OK') {
-            this.channelList = result.data.data.channels
-          }
-        })
-        .catch(err => {
-          return this.$message.error('获取文章频道错误' + err)
-        })
     },
     getArticleList () {
       let searchData = {}
@@ -177,7 +171,6 @@ export default {
     }
   },
   created () {
-    this.getChannelList()
     this.getArticleList()
   }
 }
