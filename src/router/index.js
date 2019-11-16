@@ -38,6 +38,11 @@ const routes = [{
       path: '/articleedit/:aid',
       name: 'articleedit',
       component: () => import('@/views/articleedit/articleedit.vue')
+    },
+    {
+      path: '/account',
+      name: 'aaccount',
+      component: () => import('@/views/account/account.vue')
     }
   ]
 }
