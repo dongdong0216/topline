@@ -45,6 +45,7 @@
 </template>
 
 <script>
+import bus from '@/utils/bus.js'
 export default {
   name: 'Account',
   methods: {
@@ -55,17 +56,13 @@ export default {
       pro
         .then(result => {
           if (result.data.message === 'OK') {
+            bus.$emit('upAccountPhoto', result.data.data.photo)
             this.accountForm.photo = result.data.data.photo
-            let userinfo = JSON.parse(
-              window.sessionStorage.getItem('userinfo')
-            )
-            userinfo.photo = result.data.data.photo
-            window.sessionStorage.setItem('userinfo', JSON.stringify(userinfo))
             this.$message.success('更新用户头像成功')
           }
         })
         .catch(err => {
-          this.$message.error('更新用户头像失败' + err)
+          return this.$message.error('更新用户头像失败' + err)
         })
     },
     editAccount () {
@@ -75,11 +72,12 @@ export default {
           pro
             .then(result => {
               if (result.data.message === 'OK') {
+                bus.$emit('upAccountName', result.data.data.name)
                 this.$message.success('更新账户信息成功!')
               }
             })
             .catch(err => {
-              this.$message.error('更新账户信息失败!' + err)
+              return this.$message.error('更新账户信息失败!' + err)
             })
         }
       })
@@ -93,7 +91,7 @@ export default {
           }
         })
         .catch(err => {
-          this.$message.error('获取账户信息错误' + err)
+          return this.$message.error('获取账户信息错误' + err)
         })
     }
   },

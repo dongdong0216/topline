@@ -84,11 +84,11 @@
 <script>
 import ChannelCom from '@/components/channel.vue'
 export default {
+  name: 'ArticleList',
   components: {
     // 注册频道独立组件
     ChannelCom
   },
-  name: 'articleList',
   data () {
     return {
       articleList: [],
@@ -139,7 +139,7 @@ export default {
               this.getArticleList()
             })
             .catch(err => {
-              this.$message.error('文章删除错误' + err)
+              return this.$message.error('文章删除错误' + err)
             })
         })
         .catch(() => {})

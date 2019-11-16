@@ -43,6 +43,16 @@ const routes = [{
       path: '/account',
       name: 'aaccount',
       component: () => import('@/views/account/account.vue')
+    },
+    {
+      path: '/material',
+      name: 'amaterial',
+      component: () => import('@/views/material/material.vue')
+    },
+    {
+      path: '/pinglun',
+      name: 'pinglun',
+      component: () => import('@/views/pinglun/pinglun.vue')
     }
   ]
 }

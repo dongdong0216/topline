@@ -21,8 +21,8 @@
           </template>
           <el-menu-item index="/articleadd">发布文章</el-menu-item>
           <el-menu-item index="/article">内容列表</el-menu-item>
-          <el-menu-item index="2-3">评论列表</el-menu-item>
-          <el-menu-item index="2-4">素材管理</el-menu-item>
+          <el-menu-item index="/pinglun">评论列表</el-menu-item>
+          <el-menu-item index="/material">素材管理</el-menu-item>
         </el-submenu>
 
         <el-menu-item index="3" :style="{width:isCollapse?'65px':'200px'}">
@@ -75,19 +75,22 @@
 </template>
 
 <script>
+import bus from '@/utils/bus.js'
 export default {
-  name: 'Article',
+  name: 'Home',
   data () {
     return {
+      tmpname: '',
+      tmpphoto: '',
       isCollapse: false
     }
   },
   computed: {
     name () {
-      return JSON.parse(window.sessionStorage.getItem('userinfo')).name
+      return this.tmpname || JSON.parse(window.sessionStorage.getItem('userinfo')).name
     },
     photo () {
-      return JSON.parse(window.sessionStorage.getItem('userinfo')).photo
+      return this.tmpphoto || JSON.parse(window.sessionStorage.getItem('userinfo')).photo
     }
   },
   methods: {
@@ -107,6 +110,20 @@ export default {
         })
         .catch(() => {})
     }
+  },
+  created () {
+    bus.$on('upAccountName', nm => {
+      let userinfo = JSON.parse(window.sessionStorage.getItem('userinfo'))
+      userinfo.name = nm
+      window.sessionStorage.setItem('userinfo', JSON.stringify(userinfo))
+      this.tmpname = nm
+    })
+    bus.$on('upAccountPhoto', ph => {
+      let userinfo = JSON.parse(window.sessionStorage.getItem('userinfo'))
+      userinfo.photo = ph
+      window.sessionStorage.setItem('userinfo', JSON.stringify(userinfo))
+      this.tmpphoto = ph
+    })
   }
 }
 </script>

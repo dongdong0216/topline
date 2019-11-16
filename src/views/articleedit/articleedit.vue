@@ -84,7 +84,7 @@ export default {
           }
         })
         .catch(err => {
-          this.$message.error('获取文章失败!' + err)
+          return this.$message.error('获取文章失败!' + err)
         })
     },
     editarticle (flag) {

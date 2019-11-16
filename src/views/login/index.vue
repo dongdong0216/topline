@@ -30,6 +30,7 @@
 import '@/assets/js/gt.js'
 import '@/assets/iconfont/iconfont.css'
 export default {
+  name: 'Login',
   data () {
     var xieyiTest = function (rule, value, callback) {
       value ? callback() : callback(new Error('请无条件遵守规矩'))
@@ -99,7 +100,7 @@ export default {
             this.$router.push({ name: 'home' })
           }
         }).catch((err) => {
-          this.$message.error('手机号或密码错误 ' + err)
+          return this.$message.error('手机号或密码错误 ' + err)
         })
     }
   },
