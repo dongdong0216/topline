@@ -25,7 +25,7 @@
           <el-menu-item index="/material">素材管理</el-menu-item>
         </el-submenu>
 
-        <el-menu-item index="3" :style="{width:isCollapse?'65px':'200px'}">
+        <el-menu-item index="/pinglun" :style="{width:isCollapse?'65px':'200px'}">
           <i class="el-icon-location"></i>
           <span slot="title">粉丝管理</span>
         </el-menu-item>
